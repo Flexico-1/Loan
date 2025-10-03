@@ -249,6 +249,20 @@
       return n.toLocaleString('en-US');
     };
 
+    ,<script>
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    // Language selection prompt
+    const choice = confirm("Select your language:\n\nClick 'OK' for English\nClick 'Cancel' for සිංහල");
+    if(choice){
+      alert("You selected English ✅");
+      // Here you can redirect or set language = English
+    }else{
+      alert("ඔයා සිංහල තෝරාගත්තා ✅");
+      // Here you can redirect or set language = Sinhala
+    }
+  });
+</script>
+    
     const amountRange = document.getElementById('amountRange');
     const amountText = document.getElementById('amountText');
     const monthlyValue = document.getElementById('monthlyValue');
