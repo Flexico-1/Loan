@@ -1,50 +1,251 @@
 <!doctype html>
 <html lang="si">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flexico Loan</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flexico Loan Widget</title>
+  <style>
+    :root{
+      --green-start: #16c172;
+      --green-end: #0aa764;
+      --bg: #f7fbfb;
+      --card: #ffffff;
+      --muted: #8b98a0;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+    }
+    .app{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:12px;
+      box-sizing:border-box;
+    }
+    .topbar{
+      width:100%;
+      max-width:420px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:12px 10px;
+      box-sizing:border-box;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-mark{
+      width:40px;height:40px;border-radius:8px;
+      background:linear-gradient(135deg,var(--green-start),var(--green-end));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+      font-size:18px;
+      box-shadow:0 4px 10px rgba(10,167,100,0.2);
+    }
+    .brand-text{
+      font-weight:700;
+      font-size:18px;
+    }
+    .top-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn{
+      padding:8px 12px;border-radius:8px;border:0;background:var(--card);
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);font-weight:600;
+    }
+    .card{
+      width:100%;
+      max-width:420px;
+      background:var(--card);
+      border-radius:14px;
+      padding:16px;
+      box-sizing:border-box;
+      box-shadow:0 8px 30px rgba(10,10,10,0.05);
+      margin-top:6px;
+    }
+    .headline{
+      font-size:20px;
+      font-weight:800;
+      color:#111827;
+      margin-bottom:8px;
+      text-align:center;
+    }
+    .sub{
+      color:var(--muted);
+      text-align:center;
+      margin-bottom:12px;
+      line-height:1.35;
+    }
+    .hero{
+      width:100%;
+      height:110px;
+      border-radius:10px;
+      background:linear-gradient(90deg,#3fb88f,#1da36b);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+    .slider-row{display:flex;flex-direction:column;gap:10px;}
+    .amount-display{display:flex;align-items:center;justify-content:space-between;}
+    .amount-display .label{font-weight:700;font-size:18px;}
+    .amount-display .value{font-weight:800;font-size:18px;}
+    input[type="range"]{
+      -webkit-appearance:none;
+      width:100%;
+      height:8px;
+      border-radius:8px;
+      background:linear-gradient(90deg,var(--green-start),var(--green-end));
+      outline:none;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:28px;height:28px;border-radius:50%;
+      background:#fff;border:6px solid #0aa764;box-shadow:0 4px 10px rgba(10,167,100,0.25);
+    }
+    .minmax{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:4px;}
+    .results{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .result-box{
+      background:#f6f9f8;border-radius:10px;padding:10px;
+      display:flex;flex-direction:column;gap:6px;
+      min-height:64px;box-sizing:border-box;
+      justify-content:center;
+    }
+    .result-box .r-label{font-size:12px;color:var(--muted);}
+    .result-box .r-value{font-weight:800;font-size:16px;color:#0b3a2d;}
+    .full-row{grid-column:1/-1;}
+    .apply-row{
+      margin-top:14px;
+      display:flex;gap:10px;align-items:center;
+    }
+    .apply-button{
+      flex:1;
+      padding:12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--green-start),var(--green-end));
+      color:white;font-weight:800;font-size:16px;
+      box-shadow:0 8px 20px rgba(10,167,100,0.18);
+    }
+    .muted-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;}
+    @media(min-width:520px){
+      .app{padding:24px;}
+    }
+  </style>
 </head>
 <body>
-  <button id="loginBtn">ඇතුල් වන්න</button>
-  <br><br>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo-mark">F</div>
+        <div>
+          <div class="brand-text">Flexico.</div>
+          <div style="font-size:12px;color:var(--muted)">ඔබේ මුදල් සවන්ද</div>
+        </div>
+      </div>
 
-  <label>ණය මුදල: <span id="amountText">30,000</span></label><br>
-  <input id="amountRange" type="range" min="30000" max="500000" step="1000" value="30000"><br>
-  <div>මාසික වාරිකය: <span id="monthlyValue">0</span></div>
-  <div>සම්පූර්ණ මුදල: <span id="totalPayable">0</span></div>
-  <div>වාරික ගණන: <span id="installmentsCount">-</span></div>
-  <div>පළමු වාරික දිනය: <span id="firstDueDate">-</span></div>
+      <div class="top-actions">
+        <button class="btn" id="loginBtn">ඇතුල් වන්න</button>
+        <button class="btn" id="menuBtn" aria-label="menu">⋮</button>
+      </div>
+    </div>
+
+    <div class="card" role="region" aria-label="Loan widget">
+      <div class="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
+      <div class="sub">ඇප්ලයි කරන්න, විනාඩි කිහිපයකින් මුදල් ලබාගන්න.</div>
+      <div class="hero">Flexico — සරල හා වේගවත්</div>
+
+      <div class="slider-row">
+        <div class="amount-display">
+          <div class="label">ණය මුදල</div>
+          <div class="value">රු <span id="amountText">30,000</span></div>
+        </div>
+
+        <input id="amountRange" type="range" min="30000" max="500000" step="1000" value="30000" />
+        <div class="minmax"><span>රු 30,000</span><span>රු 500,000</span></div>
+      </div>
+
+      <div class="results">
+        <div class="result-box">
+          <div class="r-label">පොලී අනුපාතය (වාර්ෂික)</div>
+          <div class="r-value">7%</div>
+        </div>
+        <div class="result-box">
+          <div class="r-label">වෙනුවෙන් ගෙවිය යුත්තේ මාසික</div>
+          <div class="r-value" id="monthlyValue">රු 0</div>
+        </div>
+        <div class="result-box">
+          <div class="r-label">වාරික ගණන</div>
+          <div class="r-value" id="installmentsCount">-</div>
+        </div>
+        <div class="result-box">
+          <div class="r-label">සම්පූර්ණ ගෙවිය යුතු මුදල</div>
+          <div class="r-value" id="totalPayable">රු 0</div>
+        </div>
+        <div class="result-box full-row">
+          <div class="r-label">ඇප්ලයි කරන දිනය</div>
+          <div class="r-value" id="applyDate">-</div>
+        </div>
+        <div class="result-box full-row">
+          <div class="r-label">පළමු වාරිකය ගෙවිය යුතු දිනය</div>
+          <div class="r-value" id="firstDueDate">-</div>
+        </div>
+      </div>
+
+      <div class="apply-row">
+        <button class="apply-button" id="applyBtn">ඇප්ලයි කරන්න</button>
+      </div>
+      <div class="muted-note">සම්පූර්ණ ගණනය මාසික වාරික ආකෘතිය (amortized) අනුව ගණනය වේ.</div>
+    </div>
+  </div>
 
   <script>
+    const fmt = (n) => n.toLocaleString('en-US');
+
     const amountRange = document.getElementById('amountRange');
     const amountText = document.getElementById('amountText');
     const monthlyValue = document.getElementById('monthlyValue');
     const totalPayable = document.getElementById('totalPayable');
     const installmentsCount = document.getElementById('installmentsCount');
-    const firstDueDate = document.getElementById('firstDueDate');
+    const applyDateEl = document.getElementById('applyDate');
+    const firstDueDateEl = document.getElementById('firstDueDate');
+    const applyBtn = document.getElementById('applyBtn');
 
-    const ANNUAL_RATE = 0.07;
+    const ANNUAL_RATE = 0.07; 
     const MONTH_RATE = ANNUAL_RATE / 12;
 
     function getInstallmentMonths(amount){
       if (amount <= 80000) return 6;
-      if (amount <= 120000) return 8;
-      if (amount <= 200000) return 6;
-      if (amount <= 300000) return 10;
+      if (amount > 80000 && amount <= 120000) return 8;
+      if (amount > 120000 && amount <= 200000) return 6;
+      if (amount > 200000 && amount <= 300000) return 10;
       return 12;
     }
 
     function calculate(amount){
       const n = getInstallmentMonths(amount);
       const r = MONTH_RATE;
-      const monthly = (r * amount) / (1 - Math.pow(1+r, -n));
+      let monthly = r === 0 ? amount/n : (r*amount)/(1-Math.pow(1+r,-n));
       const total = monthly * n;
       return {monthly, total, n};
     }
 
     function addMonthsKeepDay(date, months) {
-      const d = new Date(date);
+      const d = new Date(date.getTime());
       const day = d.getDate();
       d.setMonth(d.getMonth() + months);
       if (d.getDate() !== day) d.setDate(0);
@@ -53,26 +254,45 @@
 
     function updateAll(){
       const amt = Number(amountRange.value);
-      amountText.textContent = amt.toLocaleString('en-US');
+      amountText.textContent = fmt(amt);
       const {monthly, total, n} = calculate(amt);
-      monthlyValue.textContent = 'රු ' + Math.round(monthly).toLocaleString('en-US');
-      totalPayable.textContent = 'රු ' + Math.round(total).toLocaleString('en-US');
-      installmentsCount.textContent = n;
-      const firstDue = addMonthsKeepDay(new Date(),1);
-      firstDueDate.textContent = firstDue.toLocaleDateString('si-LK');
+      monthlyValue.textContent = 'රු ' + fmt(Math.round(monthly));
+      totalPayable.textContent = 'රු ' + fmt(Math.round(total));
+      installmentsCount.textContent = n + ' වාරික';
+      const now = new Date();
+      applyDateEl.textContent = now.toLocaleDateString('si-LK', {year:'numeric',month:'long',day:'numeric'});
+      const firstDue = addMonthsKeepDay(now,1);
+      firstDueDateEl.textContent = firstDue.toLocaleDateString('si-LK', {year:'numeric',month:'long',day:'numeric'});
     }
 
     updateAll();
     amountRange.addEventListener('input', updateAll);
 
-    // 🔹 Language selector on Login
-    document.getElementById('loginBtn').addEventListener('click', () => {
-      const choice = confirm("Select your language:\n\nClick 'OK' for English\nClick 'Cancel' for සිංහල");
-      if(choice){
-        alert("You selected English ✅");
+    applyBtn.addEventListener('click', () => {
+      const amt = Number(amountRange.value);
+      const {monthly, total, n} = calculate(amt);
+      const apply = new Date();
+      const firstDue = addMonthsKeepDay(apply,1);
+      alert('ඔබ ඇප්ලයි කළ අයදුම සාර්ථකයි。\n\nණය: රු ' + fmt(amt) +
+            '\nවාරික: ' + n + ' (මාසික රු ' + fmt(Math.round(monthly)) + ')' +
+            '\nපළමු වාරිකය ගෙවිය යුතු දිනය: ' + firstDue.toLocaleDateString('si-LK'));
+    });
+
+    // Login button with language selection
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.addEventListener('click', () => {
+      const lang = prompt("ඔබට භාවිතා කරන්න අවශ්‍ය භාෂාව?\n(Enter 'si' for සිංහල or 'en' for English)");
+      if(lang === "si"){
+        alert("ඔබ සිංහල භාෂාව තෝරා ගත්තා.");
+      } else if(lang === "en"){
+        alert("You selected English language.");
       } else {
-        alert("ඔයා සිංහල තෝරාගත්තා ✅");
+        alert("Invalid selection. Please enter 'si' or 'en'.");
       }
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      alert('මෙනු (demo).');
     });
   </script>
 </body>
