@@ -28,7 +28,7 @@
     .menu {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .menu button {
       background: #2a9d8f;
@@ -37,6 +37,16 @@
       padding: 6px 12px;
       border-radius: 4px;
       font-size: 14px;
+      cursor: pointer;
+    }
+    .lang-btn {
+      background: #eee;
+      color: #222;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
     }
     .dots {
       font-size: 20px;
@@ -52,6 +62,7 @@
     }
     .slider-box {
       margin: 20px 0;
+      text-align: left;
     }
     input[type=range] {
       width: 100%;
@@ -71,14 +82,6 @@
       border: none;
       border-radius: 5px;
       font-size: 18px;
-    }
-    .lang-btn {
-      margin-top: 15px;
-      font-size: 14px;
-      background: #eee;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
       cursor: pointer;
     }
   </style>
@@ -89,6 +92,7 @@
   <h1>Flexico.</h1>
   <div class="menu">
     <button id="login-btn">ඇතුල් වන්න</button>
+    <button class="lang-btn" onclick="toggleLang()">සිංහල / English</button>
     <div class="dots">⋮</div>
   </div>
 </header>
@@ -97,19 +101,19 @@
   <h2 id="main-title">ක්ෂණික මුදල් රු. 500,000 දක්වා</h2>
 
   <div class="slider-box">
-    <label for="amount">මුදල: <span id="amountLabel">30000</span> රු.</label>
+    <label for="amount" id="amountLabelText">මුදල:</label>
+    <span id="amountLabel">30,000</span> රු.
     <input type="range" id="amount" min="30000" max="500000" step="1000" value="30000">
   </div>
 
   <div class="values">
-    <p>ගෙවිය යුතු සම්පූර්ණ මුදල: <b><span id="total">0</span> රු.</b></p>
-    <p>මාසික වාරිකය: <b><span id="installment">0</span> රු.</b></p>
-    <p>වාරික ගණන: <b><span id="months">0</span></b></p>
-    <p>පළමු වාරිකය ගෙවිය යුතු දිනය: <b><span id="firstDate"></span></b></p>
+    <p id="totalText">ගෙවිය යුතු සම්පූර්ණ මුදල: <b><span id="total">0</span> රු.</b></p>
+    <p id="installmentText">මාසික වාරිකය: <b><span id="installment">0</span> රු.</b></p>
+    <p id="monthsText">වාරික ගණන: <b><span id="months">0</span></b></p>
+    <p id="firstDateText">පළමු වාරිකය ගෙවිය යුතු දිනය: <b><span id="firstDate"></span></b></p>
   </div>
 
-  <button class="apply-btn">Apply</button>
-  <button class="lang-btn" onclick="toggleLang()">සිංහල / English</button>
+  <button class="apply-btn" id="apply-btn">ඇප්ලයි කරන්න</button>
 </div>
 
 <script>
@@ -120,6 +124,15 @@
   const monthsEl = document.getElementById('months');
   const firstDateEl = document.getElementById('firstDate');
   const mainTitle = document.getElementById('main-title');
+  const loginBtn = document.getElementById("login-btn");
+  const applyBtn = document.getElementById("apply-btn");
+
+  // Text elements for language switch
+  const amountLabelText = document.getElementById("amountLabelText");
+  const totalText = document.getElementById("totalText");
+  const installmentText = document.getElementById("installmentText");
+  const monthsText = document.getElementById("monthsText");
+  const firstDateText = document.getElementById("firstDateText");
 
   function calculate(amount) {
     let months = 6;
@@ -137,6 +150,7 @@
     today.setMonth(today.getMonth() + 1);
     let firstDate = today.toLocaleDateString();
 
+    // Update UI
     amountLabel.innerText = amount.toLocaleString();
     totalEl.innerText = total.toLocaleString();
     instEl.innerText = installment.toLocaleString();
@@ -156,13 +170,23 @@
   function toggleLang() {
     if (lang === "si") {
       mainTitle.innerText = "Instant Loan up to Rs. 500,000";
-      document.querySelector('.apply-btn').innerText = "Apply";
-      document.getElementById("login-btn").innerText = "Login";
+      amountLabelText.innerText = "Amount:";
+      totalText.childNodes[0].textContent = "Total Payable: ";
+      installmentText.childNodes[0].textContent = "Monthly Installment: ";
+      monthsText.childNodes[0].textContent = "Number of Installments: ";
+      firstDateText.childNodes[0].textContent = "First Installment Date: ";
+      loginBtn.innerText = "Login";
+      applyBtn.innerText = "Apply";
       lang = "en";
     } else {
       mainTitle.innerText = "ක්ෂණික මුදල් රු. 500,000 දක්වා";
-      document.querySelector('.apply-btn').innerText = "ඇප්ලයි කරන්න";
-      document.getElementById("login-btn").innerText = "ඇතුල් වන්න";
+      amountLabelText.innerText = "මුදල:";
+      totalText.childNodes[0].textContent = "ගෙවිය යුතු සම්පූර්ණ මුදල: ";
+      installmentText.childNodes[0].textContent = "මාසික වාරිකය: ";
+      monthsText.childNodes[0].textContent = "වාරික ගණන: ";
+      firstDateText.childNodes[0].textContent = "පළමු වාරිකය ගෙවිය යුතු දිනය: ";
+      loginBtn.innerText = "ඇතුල් වන්න";
+      applyBtn.innerText = "ඇප්ලයි කරන්න";
       lang = "si";
     }
   }
