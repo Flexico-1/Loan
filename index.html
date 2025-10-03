@@ -326,6 +326,79 @@
     btnYes.classList.remove('active');
   });
 </script>
+
+  <!-- Loan Steps Section -->
+<section class="loan-guide">
+  <h1 class="hero-title">ණයක් ලබා ගැනීම පහාසුය!</h1>
+
+  <div class="step">
+    <h2 class="step-number">පියවර 1</h2>
+    <h3 class="step-title">ඔබගේ අයදුම්පත ඉදිරිපත් කරන්න</h3>
+    <p class="step-desc">ඔබගේ ඉල්ලීම යළිම සදාහ අයදුම්පත පුරවන්න</p>
+  </div>
+
+  <div class="step">
+    <h2 class="step-number">පියවර 2</h2>
+    <h3 class="step-title">ඉක්මන් ප්‍රතිචාරයක් ලබා ගන්න</h3>
+    <p class="step-desc">තීරණ ගන්නම සදාහ ගතවන්නේ විනාඩියක් පමණි</p>
+  </div>
+
+  <div class="step">
+    <h2 class="step-number">පියවර 3</h2>
+    <h3 class="step-title">ඔබේ මුදල් හුස්ම විදින්න</h3>
+    <p class="step-desc">මුදල් ඔබගේ බැංකු ගිණුමට බැර කරන ලැබේ</p>
+  </div>
+
+  <img src="your-image.jpg" alt="Happy customer" class="loan-image">
+</section>
+
+<!-- CSS -->
+<style>
+  .loan-guide {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: "Noto Sans Sinhala", sans-serif;
+    color: #111;
+    background: #fff;
+  }
+
+  .loan-guide .hero-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+
+  .loan-guide .step {
+    margin-bottom: 25px;
+  }
+
+  .loan-guide .step-number {
+    font-size: 18px;
+    color: #7AB800;
+    margin: 0;
+  }
+
+  .loan-guide .step-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+
+  .loan-guide .step-desc {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+  }
+
+  .loan-guide .loan-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+</style>
+ 
   <script>
     const fmt = (n) => n.toLocaleString('en-US');
     const amountRange = document.getElementById('amountRange');
