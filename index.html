@@ -64,13 +64,18 @@
       align-items:center;
       gap:10px;
     }
-    .logo-mark{
-      width:40px;height:40px;border-radius:8px;
-      background:linear-gradient(135deg,var(--green-start),var(--green-end));
-      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
-      font-size:18px;
-      box-shadow:0 4px 10px rgba(10,167,100,0.2);
-    }
+   .logo-mark{
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  overflow:hidden;   /* Image overflow cut කරන්න */
+  box-shadow:0 4px 10px rgba(10,167,100,0.2);
+}
+.logo-mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
     .brand-text{
       font-weight:700;
       font-size:18px;
