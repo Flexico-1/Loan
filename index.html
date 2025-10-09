@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Flexico Loan Widget</title>
+  <title>Flexico</title>
   <style>
     :root{
       --green-start: #16c172;
@@ -12,178 +12,466 @@
       --card: #ffffff;
       --muted: #8b98a0;
     }
-    html,body{
-      height:100%;
-      margin:0;
-      font-family: "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
     }
-    .app{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      padding:12px;
-      box-sizing:border-box;
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0; /* reduce extra padding for mobile */
     }
-    /* Language selector overlay */
-    .lang-overlay{
-      position:fixed;top:0;left:0;right:0;bottom:0;
-      background:rgba(0,0,0,0.6);
-      display:flex;align-items:center;justify-content:center;
-      z-index:9999;
+    .topbar {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 10px;
+      box-sizing: border-box;
     }
-    .lang-box{
-      background:white;padding:20px;border-radius:12px;
-      text-align:center;max-width:300px;width:90%;
-      box-shadow:0 6px 20px rgba(0,0,0,0.2);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .lang-box h2{margin:0 0 16px 0;font-size:18px;}
-    .lang-options{display:flex;gap:12px;justify-content:center;}
-    .lang-btn{
-      flex:1;padding:10px;border:0;border-radius:8px;
-      font-weight:600;cursor:pointer;
-      background:linear-gradient(90deg,var(--green-start),var(--green-end));
-      color:white;
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--green-start), var(--green-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(10,167,100,0.2);
     }
-    /* top bar */
-    .topbar{
-      width:100%;
-      max-width:420px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      padding:12px 10px;
-      box-sizing:border-box;
+    .brand-text {
+      font-weight: 700;
+      font-size: 18px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+    .top-actions {
+      display: flex;
+      gap: 8px;
     }
-    .logo-mark{
-      width:40px;height:40px;border-radius:8px;
-      background:linear-gradient(135deg,var(--green-start),var(--green-end));
-      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
-      font-size:18px;
-      box-shadow:0 4px 10px rgba(10,167,100,0.2);
+    .btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 0;
+      background: var(--card);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      font-weight: 600;
+      cursor: pointer;
     }
-    .brand-text{
-      font-weight:700;
-      font-size:18px;
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      box-sizing: border-box;
+      box-shadow: 0 8px 30px rgba(10,10,10,0.05);
+      margin: 10px 0;
     }
-    .top-actions{
-      display:flex;
-      gap:8px;
-      align-items:center;
+    .headline {
+      font-size: 20px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 8px;
+      text-align: center;
     }
-    .btn{
-      padding:8px 12px;border-radius:8px;border:0;background:var(--card);
-      box-shadow:0 2px 6px rgba(0,0,0,0.06);font-weight:600;
+    .sub {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 12px;
+      line-height: 1.35;
     }
-    /* main card */
-    .card{
-      width:100%;
-      max-width:420px;
-      background:var(--card);
-      border-radius:14px;
-      padding:16px;
-      box-sizing:border-box;
-      box-shadow:0 8px 30px rgba(10,10,10,0.05);
-      margin-top:6px;
+    .hero {
+      width: 100%;
+      height: 110px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #3fb88f, #1da36b);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
     }
-    .headline{
-      font-size:20px;
-      font-weight:800;
-      color:#111827;
-      margin-bottom:8px;
-      text-align:center;
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .sub{
-      color:var(--muted);
-      text-align:center;
-      margin-bottom:12px;
-      line-height:1.35;
+    .amount-display {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .hero{
-      width:100%;
-      height:110px;
-      border-radius:10px;
-      background:linear-gradient(90deg,#3fb88f,#1da36b);
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      margin-bottom:14px;
+    .amount-display .label {
+      font-weight: 700;
+      font-size: 18px;
     }
-    .slider-row{display:flex;flex-direction:column;gap:10px;}
-    .amount-display{display:flex;align-items:center;justify-content:space-between;}
-    .amount-display .label{font-weight:700;font-size:18px;}
-    .amount-display .value{font-weight:800;font-size:18px;}
-    input[type="range"]{
-      -webkit-appearance:none;
-      width:100%;
-      height:8px;
-      border-radius:8px;
-      background:linear-gradient(90deg,var(--green-start),var(--green-end));
-      outline:none;
+    .amount-display .value {
+      font-weight: 800;
+      font-size: 18px;
     }
-    input[type="range"]::-webkit-slider-thumb{
-      -webkit-appearance:none;
-      width:28px;height:28px;border-radius:50%;
-      background:#fff;border:6px solid #0aa764;box-shadow:0 4px 10px rgba(10,167,100,0.25);
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--green-start), var(--green-end));
+      outline: none;
     }
-    .minmax{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:4px;}
-    .results{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fff;
+      border: 6px solid #0aa764;
+      box-shadow: 0 4px 10px rgba(10,167,100,0.25);
     }
-    .result-box{
-      background:#f6f9f8;border-radius:10px;padding:10px;
-      display:flex;flex-direction:column;gap:6px;
-      min-height:64px;box-sizing:border-box;
-      justify-content:center;
+    .minmax {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
     }
-    .result-box .r-label{font-size:12px;color:var(--muted);}
-    .result-box .r-value{font-weight:800;font-size:16px;color:#0b3a2d;}
-    .full-row{grid-column:1/-1;}
-    .apply-row{
-      margin-top:14px;
-      display:flex;gap:10px;align-items:center;
+    .results {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .apply-button{
-      flex:1;
-      padding:12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--green-start),var(--green-end));
-      color:white;font-weight:800;font-size:16px;
-      box-shadow:0 8px 20px rgba(10,167,100,0.18);
+    .result-box {
+      background: #f6f9f8;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 64px;
+      box-sizing: border-box;
+      justify-content: center;
     }
-    .muted-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;}
+    .result-box .r-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .result-box .r-value {
+      font-weight: 800;
+      font-size: 16px;
+      color: #0b3a2d;
+    }
+    .full-row {
+      grid-column: 1 / -1;
+    }
+    .apply-row {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .apply-button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(90deg, var(--green-start), var(--green-end));
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 8px 20px rgba(10,167,100,0.18);
+      cursor: pointer;
+    }
+    .muted-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* ========== Sections after main card ========== */
+    .eligibility-section, .loan-guide, .loan-article, .app-features, .contact-footer {
+      width: 100%;
+      max-width: 700px;
+      margin: 30px auto;
+      box-sizing: border-box;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .eligibility-section {
+      text-align: center;
+    }
+    .eligibility-section .question {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .btn-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .btn-toggle button {
+      flex: 1;
+      max-width: 130px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #f1f1f1;
+      color: #222;
+    }
+    .btn-toggle button.active {
+      background: var(--green-start);
+      color: #fff;
+    }
+    .eligibility-section .info-card {
+      display: grid;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .eligibility-section .info-card .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: left;
+    }
+    .eligibility-section .card .icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .eligibility-section .card h3 {
+      font-size: 17px;
+      margin: 0 0 5px;
+    }
+    .eligibility-section .card p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .loan-guide .hero-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+    .loan-guide .step {
+      margin-bottom: 25px;
+    }
+    .loan-guide .step-number {
+      font-size: 18px;
+      color: var(--green-start);
+      margin: 0;
+    }
+    .loan-guide .step-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .loan-guide .step-desc {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+    .loan-guide .loan-image {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .loan-article .article-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .loan-article p {
+      font-size: 15px;
+      color: #222;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    .loan-article strong {
+      color: var(--green-start);
+    }
+    .loan-article .chat-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--green-start);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    .app-features .app-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    .app-features .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+      text-align: left;
+      font-size: 15px;
+      color: #333;
+    }
+    .app-features .feature-list li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-features .app-image img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .app-features .google-btn {
+      display: inline-block;
+      background: var(--green-start);
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .app-features .google-btn:hover {
+      background: var(--green-end);
+    }
+
+    .contact-footer {
+      background: var(--green-start);
+      color: #fff;
+      padding: 30px 20px 80px;
+      text-align: center;
+    }
+    .contact-footer .contact-info {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .contact-footer .contact-info p {
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    .contact-footer .contact-info a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-footer .social-links {
+      margin: 15px 0;
+    }
+    .contact-footer .social-links img {
+      width: 35px;
+      margin: 0 8px;
+    }
+    .contact-footer .store-links img {
+      width: 120px;
+      margin: 8px;
+    }
+    .contact-footer .footer-menu {
+      margin-top: 25px;
+    }
+    .contact-footer .footer-menu p {
+      margin: 5px 0;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .contact-footer .free-loan-btn {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-end);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 30px;
+      border-radius: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* ===== Responsive adjustments ===== */
+    @media screen and (max-width: 480px) {
+      .topbar, .card {
+        padding: 12px;
+      }
+      .hero {
+        height: auto;
+        font-size: 18px;
+        padding: 20px;
+      }
+      .headline {
+        font-size: 18px;
+      }
+      .sub {
+        font-size: 14px;
+      }
+      .apply-button {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .loan-guide .hero-title {
+        font-size: 20px;
+      }
+      .loan-guide .step-title {
+        font-size: 16px;
+      }
+      .loan-guide .step-desc {
+        font-size: 13px;
+      }
+      .loan-article .article-title {
+        font-size: 20px;
+      }
+      .loan-article p {
+        font-size: 14px;
+      }
+    }
+
   </style>
 </head>
 <body>
-  <!-- Language overlay -->
-  <div class="lang-overlay" id="langOverlay">
-    <div class="lang-box">
-      <h2>ඔබේ භාෂාව තෝරන්න / Select your language</h2>
-      <div class="lang-options">
-        <button class="lang-btn" data-lang="si">සිංහල</button>
-        <button class="lang-btn" data-lang="en">English</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="app" id="app" style="display:none;">
+  <div class="app" id="app">
+    <!-- Top bar and brand -->
     <div class="topbar">
       <div class="brand">
         <div class="logo-mark">F</div>
         <div>
-          <div class="brand-text">Flexico.</div>
+          <div class="brand-text">Flexico</div>
           <div id="brandSub" style="font-size:12px;color:var(--muted)">ඔබේ මුදල් සවන්ද</div>
         </div>
       </div>
@@ -193,14 +481,15 @@
       </div>
     </div>
 
+    <!-- Main calculator card -->
     <div class="card">
-      <div class="headline" id="headline"></div>
-      <div class="sub" id="sub"></div>
-      <div class="hero" id="hero"></div>
+      <div class="headline" id="headline">ක්ෂණික මුදල් රු. 500,000 දක්වා</div>
+      <div class="sub" id="sub">ඇප්ලයි කරන්න, විනාඩි කිහිපයකින් මුදල් ලබාගන්න.</div>
+      <div class="hero" id="hero">Flexico — සරල හා වේගවත්</div>
 
       <div class="slider-row">
         <div class="amount-display">
-          <div class="label" id="amountLabel"></div>
+          <div class="label" id="amountLabel">ණය මුදල</div>
           <div class="value">රු <span id="amountText">30,000</span></div>
         </div>
         <input id="amountRange" type="range" min="30000" max="500000" step="10000" value="30000" />
@@ -208,454 +497,151 @@
       </div>
 
       <div class="results">
-        <div class="result-box"><div class="r-label" id="r1"></div><div class="r-value">7%</div></div>
-        <div class="result-box"><div class="r-label" id="r2"></div><div class="r-value" id="monthlyValue">රු 0</div></div>
-        <div class="result-box"><div class="r-label" id="r3"></div><div class="r-value" id="installmentsCount">-</div></div>
-        <div class="result-box"><div class="r-label" id="r4"></div><div class="r-value" id="totalPayable">රු 0</div></div>
-        <div class="result-box full-row"><div class="r-label" id="r5"></div><div class="r-value" id="applyDate">-</div></div>
-        <div class="result-box full-row"><div class="r-label" id="r6"></div><div class="r-value" id="firstDueDate">-</div></div>
+        <div class="result-box"><div class="r-label" id="r1">පොලී අනුපාතය (වාර්ෂික)</div><div class="r-value">7%</div></div>
+        <div class="result-box"><div class="r-label" id="r2">වෙනුවෙන් ගෙවිය යුත්තේ මාසික</div><div class="r-value" id="monthlyValue">රු 0</div></div>
+        <div class="result-box"><div class="r-label" id="r3">වාරික ගණන</div><div class="r-value" id="installmentsCount">-</div></div>
+        <div class="result-box"><div class="r-label" id="r4">සම්පූර්ණ ගෙවිය යුතු මුදල</div><div class="r-value" id="totalPayable">රු 0</div></div>
+        <div class="result-box full-row"><div class="r-label" id="r5">ඇප්ලයි කරන දිනය</div><div class="r-value" id="applyDate">-</div></div>
+        <div class="result-box full-row"><div class="r-label" id="r6">පළමු වාරිකය ගෙවිය යුතු දිනය</div><div class="r-value" id="firstDueDate">-</div></div>
       </div>
 
-      <div class="apply-row"><button class="apply-button" id="applyBtn"></button></div>
-      <div class="muted-note" id="note"></div>
+      <div class="apply-row">
+        <button class="apply-button" id="applyBtn">ඇප්ලයි කරන්න</button>
+      </div>
+      <div class="muted-note" id="note">සම්පූර්ණ ගණනය මාසික වාරික ආකෘතිය (amortized) අනුව ගණනය වේ.</div>
     </div>
-  </div>
-<section class="eligibility-section">
-  <h2 class="question">
-    Cashloan ඔබ සදහා <br>
-    හොඳම තේරීමක් වන්නේ ඇයි?
-  </h2>
 
-  <div class="btn-toggle">
-    <button class="active" id="btnYes">පසුගමු නය</button>
-    <button id="btnNo">නැවත නය</button>
-  </div>
+    <!-- Eligibility Section -->
+    <section class="eligibility-section">
+      <h2 class="question">
+        Cashloan ඔබ සදහා <br>
+        හොඳම තේරීමක් වන්නේ ඇයි?
+      </h2>
+      <div class="btn-toggle">
+        <button class="active" id="btnYes">පසුගමු නය</button>
+        <button id="btnNo">නැවත නය</button>
+      </div>
+      <div class="info-card">
+        <div class="card">
+          <div class="icon">⏳</div>
+          <h3>විනාඩි 15ක් ඇතුලත ඔබේ මුදල් ලබාගන්න</h3>
+          <p>
+            සරල ලියාපදිංචි ක්‍රියාවලියක් සහ<br>
+            නියමිත පසුගමු ඉක්මන් තීරණයක්.
+          </p>
+        </div>
+        <div class="card">
+          <div class="icon">📄</div>
+          <h3>පහසුදීම සහ සරල කොන්දේසි</h3>
+          <p>
+            0% සිට 2.2% දක්වා දෛනික ගාස්තුව<br>
+            Rs 5,000 සිට 200,000 දක්වා<br>
+            දින 62 සිට 90 දක්වා නියමිත ලැබා ගන්න.
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <div class="info-card">
-    <div class="card">
-      <div class="icon">⏳</div>
-      <h3>විනාඩි 15ක් ඇතුලත ඔබේ මුදල් ලබාගන්න</h3>
+    <!-- Loan Steps Section -->
+    <section class="loan-guide">
+      <h1 class="hero-title">ණයක් ලබා ගැනීම පහසුය!</h1>
+      <div class="step">
+        <h2 class="step-number">පියවර 1</h2>
+        <h3 class="step-title">ඔබගේ අයදුම්පත ඉදිරිපත් කරන්න</h3>
+        <p class="step-desc">ඔබගේ ඉල්ලීම යළිම සදාහ අයදුම්පත පුරවන්න</p>
+      </div>
+      <div class="step">
+        <h2 class="step-number">පියවර 2</h2>
+        <h3 class="step-title">ඉක්මන් ප්‍රතිචාරයක් ලබා ගන්න</h3>
+        <p class="step-desc">තීරණ ගන්නම සදාහ ගතවන්නේ විනාඩියක් පමණි</p>
+      </div>
+      <div class="step">
+        <h2 class="step-number">පියවර 3</h2>
+        <h3 class="step-title">ඔබේ මුදල් හුස්ම විදින්න</h3>
+        <p class="step-desc">මුදල් ඔබගේ බැංකු ගිණුමට බැර කරන ලැබේ</p>
+      </div>
+      <img src="https://i.ibb.co/jZxbYs77/Whats-App-Image-2025-10-03-at-04-26-31-52b1353d.png"
+           alt="Happy customer" class="loan-image">
+    </section>
+
+    <!-- Article Section -->
+    <section class="loan-article">
+      <h1 class="article-title">
+        අන්තර්ජාලය හරහා ගෙවීම නය ලබා දෙන වෙබ් අඩවියේ නිමි කිරීම පිළිබඳ තොරතුරු
+      </h1>
       <p>
-        සරල ලියාපදිංචි ක්‍රියාවලියක් සහ<br>
-        නියමිත පසුගමු ඉක්මන් තීරණයක්.
+        <strong>Flexico</strong> වෙබ් අඩවිය ඔබට සාර්ථකව පිළිගන්නා, ශ්‍රී ලංකාව තුළ
+        නීතිමය අයදුම්පතක් හෝ මාර්ගගත මුදල් ණය පහසුකමක් සපයන ආයතනයක් ලෙස
+        විශ්වාසදායකව පිළිගනී!
       </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📄</div>
-      <h3>පහසුදීම සහ සරල කොන්දේසි</h3>
       <p>
-        0% සිට 2.2% දක්වා දෛනික ගාස්තුව<br>
-        Rs 5,000 සිට 200,000 දක්වා<br>
-        දින 62 සිට 90 දක්වා නියමිත ලැබා ගන්න.
+        ඔබගේ ආදායම සහ පුද්ගලික තොරතුරු ඉතා සුරක්ෂිතව තබා ගැනීමට
+        Flexico තාක්ෂණික සහ ආරක්ෂාකාරී ක්‍රම පද්ධති භාවිතා කරයි. මෙම සේවාව
+        ඔබට ඉක්මනින්ම සහ පහසුවෙන් ණය ලබා ගැනීමට උපකාරී වේ.
       </p>
-    </div>
-  </div>
-</section>
+      <p>
+        අන්තර්ජාලය හරහා ලාභදායි ණය පහසුකමක් සොයන විට,
+        එය සත්‍ය සහ නීතිමය ආයතනයක් බව තහවුරු කරගන්න.
+      </p>
+      <p>
+        ඔබ යම් අන්තර්ජාල මුදල් ණය අයදුම්පතක් භාවිතා කිරීමට පෙර,
+        එය සත්‍ය ආයතනයක් බව පරීක්ෂා කරන්න.
+      </p>
+      <div class="chat-icon">💬</div>
+    </section>
 
-<style>
-.eligibility-section {
-  padding: 20px;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-.eligibility-section .question {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-.btn-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.btn-toggle button {
-  flex: 1;
-  max-width: 130px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #f1f1f1;
-  color: #222;
-}
-.btn-toggle button.active {
-  background: #3fb88f; /* dark green */
-  color: #fff;
-}
-.info-card {
-  display: grid;
-  gap: 15px;
-  margin-top: 10px;
-}
-.card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 15px;
-  text-align: left;
-}
-.card .icon {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-.card h3 {
-  font-size: 17px;
-  margin: 0 0 5px;
-}
-.card p {
-  font-size: 14px;
-  color: #555;
-  margin: 0;
-}
-</style>
+    <!-- App Features Section -->
+    <section class="app-features">
+      <h2 class="app-title">ඇප් එකේ අතිරේක විශේෂාංග</h2>
+      <ul class="feature-list">
+        <li>✅ ඉල්ලීම සහ ගෙවීම පහසු ලෙස කරගත හැක</li>
+        <li>🎁 විශේෂ දීමනා සහ ප්‍රවර්ධන</li>
+        <li>🔥 වැඩි හොඳ කොන්දේසි</li>
+        <li>👍 අනුමත වීමේ හැකියාව වැඩි වේ</li>
+      </ul>
+      <div class="app-image">
+        <img src="https://i.ibb.co/F4WKWrfD/Download-the-app-and-get-a-discount-Flexico-If-you-are-a-frequent-customer-of-the-instant-loan-facil.png"
+             alt="App Image">
+      </div>
+      <a href="#" class="google-btn">Google Play</a>
+    </section>
 
-<script>
-  const btnYes = document.getElementById('btnYes');
-  const btnNo = document.getElementById('btnNo');
+    <!-- Contact Section -->
+    <section class="contact-footer">
+      <div class="contact-info">
+        <p><span class="icon">📞</span> <strong>Customer Care Hotline</strong><br>
+        011 123 4567</p>
 
-  btnYes.addEventListener('click', () => {
-    btnYes.classList.add('active');
-    btnNo.classList.remove('active');
-  });
+        <p><span class="icon">✉</span> <strong>ඊ‑මේල් ලිපිනය</strong><br>
+        <a href="mailto:info@flexico.lk">info@flexico.lk</a></p>
 
-  btnNo.addEventListener('click', () => {
-    btnNo.classList.add('active');
-    btnYes.classList.remove('active');
-  });
-</script>
+        <p><span class="icon">📅</span> <strong>වැඩ කරන වේලාවන්</strong><br>
+        24/7 අයදුම්පත් භාරගැනීම</p>
+      </div>
 
-  <!-- Loan Steps Section -->
-<section class="loan-guide">
-  <h1 class="hero-title">ණයක් ලබා ගැනීම පහාසුය!</h1>
+      <div class="social-links">
+        <a href="#"><img src="facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="youtube.png" alt="YouTube"></a>
+      </div>
 
-  <div class="step">
-    <h2 class="step-number">පියවර 1</h2>
-    <h3 class="step-title">ඔබගේ අයදුම්පත ඉදිරිපත් කරන්න</h3>
-    <p class="step-desc">ඔබගේ ඉල්ලීම යළිම සදාහ අයදුම්පත පුරවන්න</p>
+      <div class="store-links">
+        <a href="#"><img src="google-play.png" alt="Google Play"></a>
+        <a href="#"><img src="appgallery.png" alt="AppGallery"></a>
+        <a href="#"><img src="app-store.png" alt="App Store"></a>
+      </div>
+
+      <div class="footer-menu">
+        <p>අප ගැන</p>
+        <p>ණය විසදුම්</p>
+        <p>පාරිභෝගිකයින් සඳහා</p>
+      </div>
+    </section>
   </div>
 
-  <div class="step">
-    <h2 class="step-number">පියවර 2</h2>
-    <h3 class="step-title">ඉක්මන් ප්‍රතිචාරයක් ලබා ගන්න</h3>
-    <p class="step-desc">තීරණ ගන්නම සදාහ ගතවන්නේ විනාඩියක් පමණි</p>
-  </div>
-
-  <div class="step">
-    <h2 class="step-number">පියවර 3</h2>
-    <h3 class="step-title">ඔබේ මුදල් හුස්ම විදින්න</h3>
-    <p class="step-desc">මුදල් ඔබගේ බැංකු ගිණුමට බැර කරන ලැබේ</p>
-  </div>
-
-  <img src="https://i.ibb.co/jZxbYs77/Whats-App-Image-2025-10-03-at-04-26-31-52b1353d.png" alt="Happy customer" class="loan-image">
-</section>
-
-<!-- CSS -->
-<style>
-  .loan-guide {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: "Noto Sans Sinhala", sans-serif;
-    color: #111;
-    background: #fff;
-  }
-
-  .loan-guide .hero-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 25px;
-  }
-
-  .loan-guide .step {
-    margin-bottom: 25px;
-  }
-
-  .loan-guide .step-number {
-    font-size: 18px;
-    color: #2cbc8c;
-    margin: 0;
-  }
-
-  .loan-guide .step-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 5px 0;
-  }
-
-  .loan-guide .step-desc {
-    font-size: 14px;
-    color: #555;
-    margin: 0;
-  }
-
-  .loan-guide .loan-image {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-</style>
- 
-<!-- Article Section -->
-<section class="loan-article">
-  <h1 class="article-title">
-    අන්තර්ජාලය හරහා ගෙවීම නය ලබා දෙන වෙබ් අඩවියේ නිමිකරූ පිළිබඳ තොරතුරු
-  </h1>
-
-  <p>
-    <strong>LoanPlus</strong> වෙබ් අඩවිය ඔබට සාර්ථකව පිළිගැනෙන, ශ්‍රී ලංකාව තුළ
-    නීතිමය අයදුම්පතක් හෝ මාර්ගගත මුදල් ණය පහසුකමක් සපයන ආයතනයක් ලෙස
-    විස්වාසදායකව පිළිගන්නා ලදී! අන්තර්ජාලයෙන් විශ්වාසයෙන් ගෙවදීම
-    කිරීම සඳහා ගොඩනැඟී ඇති තත්ත්වයන් ඉතා විශිෂ්ට ය.
-  </p>
-
-  <p>
-    ඔබගේ ආදායම සහ පුද්ගලික තොරතුරු ඉතා සුරක්ෂිතව තබා ගැනීමට LoanPlus
-    තාක්ෂණික සහ ආරක්ෂාකාරී ක්‍රම පද්ධති භාවිතා කරයි. මෙම සේවාව ඔබට
-    ඉක්මනින්ම සහ පහසුවෙන් ණය ලබා ගැනීමට උපකාරී වේ.
-  </p>
-
-  <p>
-    අන්තර්ජාලය හරහා ලාභදායි ණය පහසුකමක් සලා ගන්නෙ කොහෙද?
-  </p>
-
-  <p>
-    ඔබ යම් අන්තර්ජාල මූල ණය අයදුම්පතක් භාවිතා කිරීමට පෙර, එය සත්‍ය සහ
-    නීතිමය ආයතනයක් බව තහවුරු කරගන්න. LoanPlus වැනි
-    ලියාපදිංචි වූ ආයතනකින් ණය ලබා ගැනීම විශ්වාසදායක ක්‍රමයකි.
-  </p>
-
-  <div class="chat-icon">
-    💬
-  </div>
-</section>
-
-<!-- CSS -->
-<style>
-  .loan-article {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: "Noto Sans Sinhala", sans-serif;
-    background: #fff;
-    line-height: 1.8;
-    color: #111;
-  }
-
-  .loan-article .article-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-
-  .loan-article p {
-    font-size: 15px;
-    color: #222;
-    margin-bottom: 15px;
-  }
-
-  .loan-article strong {
-    color: #3b3bff;
-  }
-
-  .loan-article .chat-icon {
-    width: 60px;
-    height: 60px;
-    background: #5939ff;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  }
-</style>
-  
-<!-- App Features Section -->
-<section class="app-features">
-  <h2 class="app-title">More features in the App</h2>
-
-  <ul class="feature-list">
-    <li>✅ Easier way to apply and to make payments</li>
-    <li>🎁 Special offers and promotions</li>
-    <li>🔥 More favorable conditions</li>
-    <li>👍 Increased chances of approval</li>
-  </ul>
-
-  <div class="app-image">
-    <img src="https://i.ibb.co/F4WKWrfD/Download-the-app-and-get-a-discount-Flexico-If-you-are-a-frequent-customer-of-the-instant-loan-facil.png">
-  </div>
-
-  <a href="#" class="google-btn">Google Play</a>
-</section>
-
-<!-- CSS -->
-<style>
-  .app-features {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: "Poppins", sans-serif;
-    text-align: center;
-    background: #fff;
-  }
-
-  .app-features .app-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #111;
-  }
-
-  .app-features .feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 25px 0;
-    text-align: left;
-    font-size: 15px;
-    color: #333;
-  }
-
-  .app-features .feature-list li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .app-features .app-image img {
-    width: 100%;
-    border-radius: 12px;
-    margin: 20px 0;
-  }
-
-  .app-features .google-btn {
-    display: inline-block;
-    background: #00a651;
-    color: #fff;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: 8px;
-    transition: background 0.3s;
-  }
-
-  .app-features .google-btn:hover {
-    background: #008f46;
-  }
-</style>
-
-<!-- Contact Section -->
-<section class="contact-footer">
-  <div class="contact-info">
-    <p><span class="icon">📞</span> <strong>Customer Care Hotline</strong><br>
-    
-
-    <p><span class="icon">✉</span> <strong>E-mail Address</strong><br>
-    <a href="mailto:info@oncredit.lk">info@oncredit.lk</a></p>
-
-    <p><span class="icon">📅</span> <strong>Working hours</strong><br>
-    24/7 acceptance of applications</p>
-  </div>
-
-  <div class="social-links">
-    <a href="#"><img src="facebook.png" alt="Facebook"></a>
-    <a href="#"><img src="youtube.png" alt="YouTube"></a>
-  </div>
-
-  <div class="store-links">
-    <a href="#"><img src="google-play.png" alt="Google Play"></a>
-    <a href="#"><img src="appgallery.png" alt="AppGallery"></a>
-    <a href="#"><img src="app-store.png" alt="App Store"></a>
-  </div>
-
-  <div class="footer-menu">
-    <p>About Us</p>
-    <p>Lending Solutions</p>
-    <p>For Customers</p>
-  </div>
-
-  <div class="free-loan-btn">
-    24/7 Get free first loan
-  </div>
-</section>
-
-<!-- CSS -->
-<style>
-  .contact-footer {
-    background: #00a48c;
-    color: #fff;
-    padding: 30px 20px 80px;
-    font-family: "Poppins", sans-serif;
-    position: relative;
-    text-align: center;
-  }
-
-  .contact-footer .contact-info {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-
-  .contact-footer .contact-info p {
-    margin-bottom: 15px;
-    font-size: 14px;
-  }
-
-  .contact-footer .contact-info a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .contact-footer .social-links {
-    margin: 15px 0;
-  }
-
-  .contact-footer .social-links img {
-    width: 35px;
-    margin: 0 8px;
-  }
-
-  .contact-footer .store-links img {
-    width: 120px;
-    margin: 8px;
-  }
-
-  .contact-footer .footer-menu {
-    margin-top: 25px;
-  }
-
-  .contact-footer .footer-menu p {
-    margin: 5px 0;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .contact-footer .free-loan-btn {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #00d79b;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 30px;
-    border-radius: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  }
-</style>
-  
   <script>
+    // Formatter
     const fmt = (n) => n.toLocaleString('en-US');
+
     const amountRange = document.getElementById('amountRange');
     const amountText = document.getElementById('amountText');
     const monthlyValue = document.getElementById('monthlyValue');
@@ -664,23 +650,24 @@
     const applyDateEl = document.getElementById('applyDate');
     const firstDueDateEl = document.getElementById('firstDueDate');
     const applyBtn = document.getElementById('applyBtn');
+
     const ANNUAL_RATE = 0.07;
     const MONTH_RATE = ANNUAL_RATE / 12;
 
-    function getInstallmentMonths(amount){
+    function getInstallmentMonths(amount) {
       if (amount <= 80000) return 6;
       if (amount > 80000 && amount <= 120000) return 8;
       if (amount > 120000 && amount <= 200000) return 6;
       if (amount > 200000 && amount <= 300000) return 10;
       return 12;
     }
-    function calculate(amount){
+    function calculate(amount) {
       const n = getInstallmentMonths(amount);
       const r = MONTH_RATE;
       let monthly;
       if (r === 0) monthly = amount / n;
       else monthly = (r * amount) / (1 - Math.pow(1 + r, -n));
-      return {monthly, total: monthly*n, n};
+      return { monthly, total: monthly * n, n };
     }
     function addMonthsKeepDay(date, months) {
       const d = new Date(date.getTime());
@@ -690,76 +677,24 @@
       return d;
     }
 
-    const texts = {
-      si: {
-        brandSub:"ඔබේ මුදල් සවන්ද",login:"ඇතුල් වන්න",
-        headline:"ක්ෂණික මුදල් රු. 500,000 දක්වා",
-        sub:"ඇප්ලයි කරන්න, විනාඩි කිහිපයකින් මුදල් ලබාගන්න.",
-        hero:"Flexico — සරල හා වේගවත්",amountLabel:"ණය මුදල",
-        r1:"පොලී අනුපාතය (වාර්ෂික)",r2:"වෙනුවෙන් ගෙවිය යුත්තේ මාසික",
-        r3:"වාරික ගණන",r4:"සම්පූර්ණ ගෙවිය යුතු මුදල",
-        r5:"ඇප්ලයි කරන දිනය",r6:"පළමු වාරිකය ගෙවිය යුතු දිනය",
-        apply:"ඇප්ලයි කරන්න",
-        note:"සම්පූර්ණ ගණනය මාසික වාරික ආකෘතිය (amortized) අනුව ගණනය වේ.",
-        installments:(n)=>n+" වාරික"
-      },
-      en: {
-        brandSub:"Your money partner",login:"Login",
-        headline:"Instant Loans up to Rs. 500,000",
-        sub:"Apply now, get money within minutes.",
-        hero:"Flexico — Simple & Fast",amountLabel:"Loan Amount",
-        r1:"Interest Rate (Annual)",r2:"Monthly Installment",
-        r3:"No. of Installments",r4:"Total Payable",
-        r5:"Apply Date",r6:"First Due Date",
-        apply:"Apply Now",
-        note:"All calculations are based on standard amortized installments.",
-        installments:(n)=>n+" installments"
-      }
-    };
-
-    let currentLang="si";
-    function updateAll(){
+    function updateAll() {
       const amt = Number(amountRange.value);
       amountText.textContent = fmt(amt);
-      const {monthly,total,n} = calculate(amt);
+      const { monthly, total, n } = calculate(amt);
       monthlyValue.textContent = 'රු ' + fmt(Math.round(monthly));
       totalPayable.textContent = 'රු ' + fmt(Math.round(total));
-      installmentsCount.textContent = texts[currentLang].installments(n);
-      const now=new Date();
-      applyDateEl.textContent = now.toLocaleDateString(currentLang==="si"?"si-LK":"en-GB",{year:'numeric',month:'long',day:'numeric'});
-      const firstDue=addMonthsKeepDay(now,1);
-      firstDueDateEl.textContent = firstDue.toLocaleDateString(currentLang==="si"?"si-LK":"en-GB",{year:'numeric',month:'long',day:'numeric'});
+      installmentsCount.textContent = n + " වාරික";
+      const now = new Date();
+      applyDateEl.textContent = now.toLocaleDateString('si-LK', { year: 'numeric', month: 'long', day: 'numeric' });
+      const firstDue = addMonthsKeepDay(now, 1);
+      firstDueDateEl.textContent = firstDue.toLocaleDateString('si-LK', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
-    function setLang(lang){
-      currentLang=lang;
-      const t=texts[lang];
-      document.getElementById("brandSub").textContent=t.brandSub;
-      document.getElementById("loginBtn").textContent=t.login;
-      document.getElementById("headline").textContent=t.headline;
-      document.getElementById("sub").textContent=t.sub;
-      document.getElementById("hero").textContent=t.hero;
-      document.getElementById("amountLabel").textContent=t.amountLabel;
-      document.getElementById("r1").textContent=t.r1;
-      document.getElementById("r2").textContent=t.r2;
-      document.getElementById("r3").textContent=t.r3;
-      document.getElementById("r4").textContent=t.r4;
-      document.getElementById("r5").textContent=t.r5;
-      document.getElementById("r6").textContent=t.r6;
-      document.getElementById("applyBtn").textContent=t.apply;
-      document.getElementById("note").textContent=t.note;
-      updateAll();
-    }
-
-    document.querySelectorAll(".lang-btn").forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        setLang(btn.dataset.lang);
-        document.getElementById("langOverlay").style.display="none";
-        document.getElementById("app").style.display="flex";
-      });
-    });
-
+    // Set event
     amountRange.addEventListener('input', updateAll);
+
+    // Initialize
+    updateAll();
   </script>
 </body>
 </html>
