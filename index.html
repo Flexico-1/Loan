@@ -372,168 +372,57 @@
     }
     .app-features .google-btn:hover {
       background: var(--green-end);
-     :root{
-      --bg: #063a3a;
-      --card: #073b3b;
-      --muted: #9fb3b3;
-      --text: #eaf6f5;
-      --accent: #ff8a1f;
-      --divider: rgba(255,255,255,0.06);
-      --gap: 18px;
-      --radius: 6px;
-      --max-width: 480px;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:20px;
-      display:flex;
-      justify-content:center;
+    .contact-footer {
+      background: var(--green-start);
+      color: #fff;
+      padding: 30px 20px 80px;
+      text-align: center;
     }
-
-    .footer-wrap{
-      width:100%;
-      max-width:var(--max-width);
+    .contact-footer .contact-info {
+      margin-bottom: 20px;
+      text-align: left;
     }
-
-    .contact-top{
-      padding:18px;
-      border-radius:8px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .contact-footer .contact-info p {
+      margin-bottom: 15px;
+      font-size: 14px;
     }
-
-    .contact-line{
-      display:flex;
-      gap:14px;
-      align-items:center;
+    .contact-footer .contact-info a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
     }
-
-    .icon{
-      width:44px;
-      height:44px;
-      flex:0 0 44px;
-      display:inline-grid;
-      place-items:center;
-      border-radius:50%;
-      background:transparent;
-      stroke:var(--muted);
-      stroke-width:1.2;
+    .contact-footer .social-links {
+      margin: 15px 0;
     }
-
-    .contact-info{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
+    .contact-footer .social-links img {
+      width: 35px;
+      margin: 0 8px;
     }
-
-    .phone-number{
-      font-weight:700;
-      font-size:20px;
-      color:var(--accent);
-      letter-spacing:0.6px;
+    .contact-footer .store-links img {
+      width: 120px;
+      margin: 8px;
     }
-
-    .small-muted{
-      color:var(--muted);
-      font-size:14px;
+    .contact-footer .footer-menu {
+      margin-top: 25px;
     }
-
-    .accordion{
-      margin-top:14px;
-      border-radius:8px;
-      overflow:hidden;
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.03);
+    .contact-footer .footer-menu p {
+      margin: 5px 0;
+      font-weight: 600;
+      cursor: pointer;
     }
-
-    .acc-item{
-      border-top:1px solid var(--divider);
-      background:transparent;
-    }
-
-    .acc-btn{
-      width:100%;
-      padding:18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      background:transparent;
-      color:var(--text);
-      font-size:18px;
-      font-weight:600;
-      text-align:left;
-      border:0;
-      cursor:pointer;
-    }
-
-    .acc-btn:focus{outline:2px solid rgba(255,255,255,0.06); outline-offset:2px}
-
-    .acc-chevron{
-      width:24px;
-      height:24px;
-      transform:rotate(0deg);
-      transition:transform .25s ease;
-      opacity:0.95;
-    }
-
-    .acc-item[aria-expanded="true"] .acc-chevron{
-      transform:rotate(180deg);
-    }
-
-    .acc-panel{
-      padding:0 18px 18px 18px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.5;
-      display:none;
-    }
-
-    .acc-item[aria-expanded="true"] .acc-panel{
-      display:block;
-    }
-
-    .footer-bottom{
-      margin-top:20px;
-      padding:18px;
-      background:transparent;
-      color:var(--muted);
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      font-size:14px;
-    }
-
-    .links-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .links-row a{
-      color:var(--muted);
-      text-decoration:none;
-    }
-
-    .company-desc{
-      color:rgba(159,179,179,0.7);
-      font-size:13px;
-      line-height:1.45;
-      margin-top:6px;
-    }
-
-    @media (max-width:420px){
-      .phone-number{font-size:18px}
-      .acc-btn{font-size:16px; padding:16px}
+    .contact-footer .free-loan-btn {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-end);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 30px;
+      border-radius: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
     /* ===== Responsive adjustments ===== */
@@ -718,139 +607,37 @@
     </section>
 
     <!-- Contact Section -->
-   <div class="footer-wrap" role="contentinfo" aria-label="Footer contact and navigation">
-    <div class="contact-top" aria-hidden="false">
-      <div class="contact-line">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.09 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.09.78.27 1.53.53 2.25a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l1.83-1.83a2 2 0 0 1 2.11-.45c.72.26 1.47.44 2.25.53A2 2 0 0 1 22 16.92z"/>
-          </svg>
-        </div>
-        <div class="contact-info">
-          <a class="phone-number" href="tel:+94117750300">117750300</a>
-          <span class="small-muted">Call us 24/7 or Mon - Sun: 8.30am to 5.30pm</span>
-        </div>
+    <section class="contact-footer">
+      <div class="contact-info">
+        <p><span class="icon">📞</span> <strong>Customer Care Hotline</strong><br>
+        011 123 4567</p>
+
+        <p><span class="icon">✉</span> <strong>ඊ‑මේල් ලිපිනය</strong><br>
+        <a href="mailto:info@flexico.lk">info@flexico.lk</a></p>
+
+        <p><span class="icon">📅</span> <strong>වැඩ කරන වේලාවන්</strong><br>
+        24/7 අයදුම්පත් භාරගැනීම</p>
       </div>
 
-      <div class="contact-line">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16v12H4z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-        </div>
-        <div class="contact-info">
-          <a class="small-muted" href="mailto:info@flexico.lk">info@flexico.lk</a>
-        </div>
+      <div class="social-links">
+        <a href="#"><img src="facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="youtube.png" alt="YouTube"></a>
       </div>
 
-      <div class="contact-line">
-        <div class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"></circle>
-            <polyline points="12 7 12 12 15 15"></polyline>
-          </svg>
-        </div>
-        <div class="contact-info">
-          <span class="small-muted">Mon - Sun: 8.30am to 5.30pm</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" role="navigation" aria-label="Footer navigation">
-      <div class="acc-item" aria-expanded="false">
-        <button class="acc-btn" aria-controls="panel-company" aria-expanded="false">
-          <span>Company</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div id="panel-company" class="acc-panel" role="region" aria-hidden="true">
-          <a class="small-muted" href="#">About us</a>
-          <a class="small-muted" href="#">Careers</a>
-          <a class="small-muted" href="#">Contact</a>
-        </div>
+      <div class="store-links">
+        <a href="#"><img src="google-play.png" alt="Google Play"></a>
+        <a href="#"><img src="appgallery.png" alt="AppGallery"></a>
+        <a href="#"><img src="app-store.png" alt="App Store"></a>
       </div>
 
-      <div class="acc-item" aria-expanded="false">
-        <button class="acc-btn" aria-controls="panel-customer" aria-expanded="false">
-          <span>Customer</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div id="panel-customer" class="acc-panel" role="region" aria-hidden="true">
-          <a class="small-muted" href="#">Support</a>
-          <a class="small-muted" href="#">FAQ</a>
-        </div>
+      <div class="footer-menu">
+        <p>අප ගැන</p>
+        <p>ණය විසදුම්</p>
+        <p>පාරිභෝගිකයින් සඳහා</p>
       </div>
-
-      <div class="acc-item" aria-expanded="false">
-        <button class="acc-btn" aria-controls="panel-social" aria-expanded="false">
-          <span>Social</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div id="panel-social" class="acc-panel" role="region" aria-hidden="true">
-          <a class="small-muted" href="#">Facebook</a>
-          <a class="small-muted" href="#">Instagram</a>
-          <a class="small-muted" href="#">LinkedIn</a>
-        </div>
-      </div>
-
-      <div class="acc-item" aria-expanded="false">
-        <button class="acc-btn" aria-controls="panel-products" aria-expanded="false">
-          <span>Products and services</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-        <div id="panel-products" class="acc-panel" role="region" aria-hidden="true">
-          <a class="small-muted" href="#">Personal Loans</a>
-          <a class="small-muted" href="#">Business Loans</a>
-          <a class="small-muted" href="#">Insurance</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="links-row">
-        <a href="#" class="small-muted">Terms and Conditions</a>
-        <a href="#" class="small-muted">Privacy Policy</a>
-      </div>
-      <div class="company-desc">
-        Flexico (Pvt) Ltd is a licensed financial service provider in Sri Lanka.
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script>
-    (function(){
-      const items = document.querySelectorAll('.acc-item');
-      items.forEach(item => {
-        const btn = item.querySelector('.acc-btn');
-        const panel = item.querySelector('.acc-panel');
-
-        btn.addEventListener('click', () => {
-          const expanded = item.getAttribute('aria-expanded') === 'true';
-          items.forEach(i => {
-            i.setAttribute('aria-expanded', 'false');
-            i.querySelector('.acc-btn').setAttribute('aria-expanded','false');
-            i.querySelector('.acc-panel').setAttribute('aria-hidden','true');
-          });
-
-          if(!expanded){
-            item.setAttribute('aria-expanded', 'true');
-            btn.setAttribute('aria-expanded','true');
-            panel.setAttribute('aria-hidden','false');
-          }
-        });
-      });
-    })();
-  </script>
-  </div>
-  
   <script>
     // Formatter
     const fmt = (n) => n.toLocaleString('en-US');
