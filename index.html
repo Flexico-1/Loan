@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Flexico</title>
   <style>
-    :root {
+    :root{
       --green-start: #16c172;
       --green-end: #0aa764;
       --bg: #f7fbfb;
@@ -15,7 +15,7 @@
     html, body {
       height: 100%;
       margin: 0;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
       background: var(--bg);
       -webkit-font-smoothing: antialiased;
     }
@@ -26,6 +26,7 @@
       align-items: center;
       width: 100%;
       box-sizing: border-box;
+      padding: 0;
     }
     .topbar {
       width: 100%;
@@ -34,6 +35,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 10px;
+      box-sizing: border-box;
     }
     .brand {
       display: flex;
@@ -106,6 +108,7 @@
       margin-bottom: 14px;
       text-align: center;
       padding: 10px;
+      box-sizing: border-box;
     }
     .slider-row {
       display: flex;
@@ -117,9 +120,12 @@
       align-items: center;
       justify-content: space-between;
     }
-    .amount-display .label,
-    .amount-display .value {
+    .amount-display .label {
       font-weight: 700;
+      font-size: 18px;
+    }
+    .amount-display .value {
+      font-weight: 800;
       font-size: 18px;
     }
     input[type="range"] {
@@ -158,14 +164,16 @@
       padding: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 6px;
       min-height: 64px;
+      box-sizing: border-box;
+      justify-content: center;
     }
-    .r-label {
+    .result-box .r-label {
       font-size: 12px;
       color: var(--muted);
     }
-    .r-value {
+    .result-box .r-value {
       font-weight: 800;
       font-size: 16px;
       color: #0b3a2d;
@@ -198,86 +206,261 @@
       margin-top: 10px;
     }
 
-    /* Sections */
-    .eligibility-section, .loan-guide, .loan-article, .app-features {
+    .eligibility-section, .loan-guide, .loan-article, .app-features, .contact-footer {
       width: 100%;
       max-width: 700px;
       margin: 30px auto;
+      box-sizing: border-box;
       background: var(--card);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
-    .eligibility-section .question {
+    .eligibility-section {
       text-align: center;
-      font-size: 22px;
+    }
+    .eligibility-section .question {
+      font-size: 20px;
       font-weight: bold;
       margin-bottom: 15px;
     }
-    .info-card {
+    .btn-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .btn-toggle button {
+      flex: 1;
+      max-width: 130px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #f1f1f1;
+      color: #222;
+    }
+    .btn-toggle button.active {
+      background: var(--green-start);
+      color: #fff;
+    }
+    .eligibility-section .info-card {
       display: grid;
       gap: 15px;
+      margin-top: 10px;
     }
-    .info-card .card {
+    .eligibility-section .info-card .card {
+      background: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       padding: 15px;
+      text-align: left;
     }
-    .info-card .icon {
+    .eligibility-section .card .icon {
       font-size: 28px;
       margin-bottom: 10px;
     }
-
-    /* Footer */
-    footer {
-      background: #22182a;
-      color: #fff;
-      padding: 40px 20px;
-      font-family: "Segoe UI", sans-serif;
+    .eligibility-section .card h3 {
+      font-size: 17px;
+      margin: 0 0 5px;
     }
-    footer .accordion {
-      background: #2a1e38;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .acc-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      width: 100%;
-      text-align: left;
-      font-weight: 700;
-      font-size: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 16px;
-      cursor: pointer;
-    }
-    .acc-btn .arrow {
-      transition: transform 0.3s ease;
-    }
-    .acc-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-      background: #352647;
-      padding: 0 16px;
-    }
-    .acc-content p {
-      margin: 10px 0;
+    .eligibility-section .card p {
       font-size: 14px;
-      color: #cdbedf;
+      color: #555;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .loan-guide .hero-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+    .loan-guide .step {
+      margin-bottom: 25px;
+    }
+    .loan-guide .step-number {
+      font-size: 18px;
+      color: var(--green-start);
+      margin: 0;
+    }
+    .loan-guide .step-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .loan-guide .step-desc {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+    .loan-guide .loan-image {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .loan-article .article-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
       line-height: 1.5;
     }
-    .accordion.active .acc-content {
-      max-height: 200px;
-      padding: 10px 16px 14px;
+    .loan-article p {
+      font-size: 15px;
+      color: #222;
+      margin-bottom: 15px;
+      line-height: 1.6;
     }
-    .accordion.active .arrow {
-      transform: rotate(180deg);
+    .loan-article strong {
+      color: var(--green-start);
     }
+    .loan-article .chat-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--green-start);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    .app-features .app-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    .app-features .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px 0;
+      text-align: left;
+      font-size: 15px;
+      color: #333;
+    }
+    .app-features .feature-list li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-features .app-image img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .app-features .google-btn {
+      display: inline-block;
+      background: var(--green-start);
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    .app-features .google-btn:hover {
+      background: var(--green-end);
+    }
+
+    .contact-footer {
+      background: var(--green-start);
+      color: #fff;
+      padding: 30px 20px 80px;
+      text-align: center;
+    }
+    .contact-footer .contact-info {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .contact-footer .contact-info p {
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    .contact-footer .contact-info a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-footer .social-links {
+      margin: 15px 0;
+    }
+    .contact-footer .social-links img {
+      width: 35px;
+      margin: 0 8px;
+    }
+    .contact-footer .store-links img {
+      width: 120px;
+      margin: 8px;
+    }
+    .contact-footer .footer-menu {
+      margin-top: 25px;
+    }
+    .contact-footer .footer-menu p {
+      margin: 5px 0;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .contact-footer .free-loan-btn {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-end);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 30px;
+      border-radius: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* ===== Responsive adjustments ===== */
+    @media screen and (max-width: 480px) {
+      .topbar, .card {
+        padding: 12px;
+      }
+      .hero {
+        height: auto;
+        font-size: 18px;
+        padding: 20px;
+      }
+      .headline {
+        font-size: 18px;
+      }
+      .sub {
+        font-size: 14px;
+      }
+      .apply-button {
+        font-size: 14px;
+        padding: 10px;
+      }
+      .loan-guide .hero-title {
+        font-size: 20px;
+      }
+      .loan-guide .step-title {
+        font-size: 16px;
+      }
+      .loan-guide .step-desc {
+        font-size: 13px;
+      }
+      .loan-article .article-title {
+        font-size: 20px;
+      }
+      .loan-article p {
+        font-size: 14px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -285,169 +468,155 @@
     <div class="topbar">
       <div class="brand">
         <div class="logo-mark">F</div>
-        <div>
-          <div class="brand-text">Flexico</div>
-          <div style="font-size:12px;color:var(--muted)">Your Financial Partner</div>
-        </div>
+        <div class="brand-text">Flexico</div>
       </div>
       <div class="top-actions">
-        <button class="btn">Login</button>
-        <button class="btn">⋮</button>
+        <button class="btn">Help</button>
+        <button class="btn">About</button>
       </div>
     </div>
 
     <div class="card">
-      <div class="headline">Instant Loans up to Rs. 500,000</div>
-      <div class="sub">Apply now and get money in minutes.</div>
-      <div class="hero">Flexico — Simple & Fast</div>
+      <div class="headline">Loan Calculator</div>
+      <div class="sub">Estimate your monthly payment and total cost</div>
+
+      <div class="hero">
+        Apply Now – Fast & Easy Online Loans
+      </div>
 
       <div class="slider-row">
         <div class="amount-display">
           <div class="label">Loan Amount</div>
-          <div class="value">Rs. <span id="amountText">30,000</span></div>
+          <div class="value">Rs <span id="loanAmount">50000</span></div>
         </div>
-        <input id="amountRange" type="range" min="30000" max="500000" step="10000" value="30000" />
-        <div class="minmax"><span>Rs. 30,000</span><span>Rs. 500,000</span></div>
+        <input id="loanRange" type="range" min="10000" max="100000" step="1000" value="50000">
+        <div class="minmax"><span>Rs 10,000</span><span>Rs 100,000</span></div>
       </div>
 
       <div class="results">
-        <div class="result-box"><div class="r-label">Annual Interest Rate</div><div class="r-value">7%</div></div>
-        <div class="result-box"><div class="r-label">Monthly Payment</div><div class="r-value" id="monthlyValue">Rs. 0</div></div>
-        <div class="result-box"><div class="r-label">Installments</div><div class="r-value" id="installmentsCount">-</div></div>
-        <div class="result-box"><div class="r-label">Total Payable</div><div class="r-value" id="totalPayable">Rs. 0</div></div>
-        <div class="result-box full-row"><div class="r-label">Apply Date</div><div class="r-value" id="applyDate">-</div></div>
-        <div class="result-box full-row"><div class="r-label">First Payment Date</div><div class="r-value" id="firstDueDate">-</div></div>
+        <div class="result-box">
+          <div class="r-label">Interest Rate</div>
+          <div class="r-value" id="interestRate">10%</div>
+        </div>
+        <div class="result-box">
+          <div class="r-label">Loan Period</div>
+          <div class="r-value" id="loanPeriod">12 months</div>
+        </div>
+        <div class="result-box full-row">
+          <div class="r-label">Monthly Payment</div>
+          <div class="r-value" id="monthlyPayment">Rs 4,395</div>
+        </div>
+        <div class="result-box full-row">
+          <div class="r-label">Total Repayment</div>
+          <div class="r-value" id="totalRepayment">Rs 52,740</div>
+        </div>
       </div>
 
       <div class="apply-row">
         <button class="apply-button">Apply Now</button>
       </div>
-      <div class="muted-note">Calculated using amortized monthly schedule.</div>
+      <div class="muted-note">
+        *This is an approximate calculation only.
+      </div>
     </div>
 
     <section class="eligibility-section">
-      <h2 class="question">Why Flexico is the Best Choice for You?</h2>
+      <div class="question">Why choose Flexico Loans?</div>
+      <div class="btn-toggle">
+        <button class="active">Past Loan</button>
+        <button>Repeat Loan</button>
+      </div>
       <div class="info-card">
         <div class="card">
-          <div class="icon">⏳</div>
-          <h3>Get your money within 15 minutes</h3>
-          <p>Simple registration and instant approval for eligible users.</p>
+          <div class="icon">💸</div>
+          <h3>Fast Approval</h3>
+          <p>Get your loan approved within minutes using our automated system.</p>
         </div>
         <div class="card">
-          <div class="icon">📄</div>
-          <h3>Flexible & Simple Conditions</h3>
-          <p>Enjoy 7% annual interest for Rs. 30,000–500,000 loans from 6 to 12 months.</p>
+          <div class="icon">🔒</div>
+          <h3>Secure & Trusted</h3>
+          <p>Your personal data is fully encrypted and kept safe with us.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Quick Disbursement</h3>
+          <p>Receive your loan directly to your bank account instantly after approval.</p>
         </div>
       </div>
     </section>
 
     <section class="loan-guide">
-      <h1 class="hero-title">Getting a Loan is Easy!</h1>
+      <div class="hero-title">How to Get a Loan with Flexico</div>
       <div class="step">
-        <h2 class="step-number">Step 1</h2>
-        <h3 class="step-title">Submit Your Application</h3>
-        <p class="step-desc">Fill out your loan application online.</p>
+        <p class="step-number">Step 1</p>
+        <p class="step-title">Complete the Online Application</p>
+        <p class="step-desc">Fill in your personal and financial details accurately for faster approval.</p>
       </div>
       <div class="step">
-        <h2 class="step-number">Step 2</h2>
-        <h3 class="step-title">Get an Instant Decision</h3>
-        <p class="step-desc">Receive approval in minutes.</p>
+        <p class="step-number">Step 2</p>
+        <p class="step-title">Wait for Approval</p>
+        <p class="step-desc">Our system will review your application and send a decision instantly.</p>
       </div>
       <div class="step">
-        <h2 class="step-number">Step 3</h2>
-        <h3 class="step-title">Receive Your Money</h3>
-        <p class="step-desc">Funds are transferred directly to your bank account.</p>
+        <p class="step-number">Step 3</p>
+        <p class="step-title">Receive Your Funds</p>
+        <p class="step-desc">Once approved, your money is transferred directly to your account.</p>
       </div>
+      <img class="loan-image" src="loan-process.jpg" alt="Loan Process Illustration">
     </section>
 
-    <footer>
-      <div class="accordion">
-        <button class="acc-btn">
-          <span>Company</span>
-          <span class="arrow">⌄</span>
-        </button>
-        <div class="acc-content">
-          <p>Company info, mission, and vision go here.</p>
-        </div>
-      </div>
+    <section class="loan-article">
+      <div class="article-title">Online Loans You Can Trust</div>
+      <p>Finding a reliable online loan in Sri Lanka can be challenging. Flexico ensures that your borrowing experience is transparent, secure, and convenient.</p>
+      <p>We provide <strong>short-term personal loans</strong> that are tailored to your needs with clear repayment terms and no hidden fees.</p>
+      <p>Whether you’re facing unexpected expenses or need quick financial help, Flexico is always ready to assist you with fair and fast solutions.</p>
+      <div class="chat-icon">💬</div>
+    </section>
 
-      <div class="accordion">
-        <button class="acc-btn">
-          <span>Partners</span>
-          <span class="arrow">⌄</span>
-        </button>
-        <div class="acc-content">
-          <p>Information about clients and collaborations.</p>
-        </div>
+    <section class="app-features">
+      <div class="app-title">Download the Flexico App</div>
+      <ul class="feature-list">
+        <li>✔ Easy loan application process</li>
+        <li>✔ Track your loan status anytime</li>
+        <li>✔ Receive notifications and updates instantly</li>
+        <li>✔ Secure digital payments</li>
+      </ul>
+      <div class="app-image">
+        <img src="flexico-app.jpg" alt="Flexico App Screenshot">
       </div>
+      <a href="#" class="google-btn">Get it on Google Play</a>
+    </section>
 
-      <div class="accordion">
-        <button class="acc-btn">
-          <span>Social</span>
-          <span class="arrow">⌄</span>
-        </button>
-        <div class="acc-content">
-          <p>Links to Facebook, Instagram, or LinkedIn can go here.</p>
-        </div>
-      </div>
+    <footer class="contact-footer">
+      <h3>Contact Flexico</h3>
+      <p>Email: support@flexico.lk</p>
+      <p>Phone: +94 77 123 4567</p>
+      <p>Address: 123 Main Street, Colombo, Sri Lanka</p>
+      <p style="font-size:12px;color:#fff;margin-top:10px;">
+        © 2025 Flexico Loans (Pvt) Ltd. All rights reserved.
+      </p>
     </footer>
   </div>
 
   <script>
-    const fmt = n => n.toLocaleString('en-US');
-    const amountRange = document.getElementById('amountRange');
-    const amountText = document.getElementById('amountText');
-    const monthlyValue = document.getElementById('monthlyValue');
-    const totalPayable = document.getElementById('totalPayable');
-    const installmentsCount = document.getElementById('installmentsCount');
-    const applyDateEl = document.getElementById('applyDate');
-    const firstDueDateEl = document.getElementById('firstDueDate');
-    const ANNUAL_RATE = 0.07, MONTH_RATE = ANNUAL_RATE / 12;
+    const range = document.getElementById('loanRange');
+    const loanAmountEl = document.getElementById('loanAmount');
+    const monthlyPaymentEl = document.getElementById('monthlyPayment');
+    const totalRepaymentEl = document.getElementById('totalRepayment');
+    const interestRate = 0.10;
+    const months = 12;
 
-    function getInstallmentMonths(amount) {
-      if (amount <= 80000) return 6;
-      if (amount <= 120000) return 8;
-      if (amount <= 200000) return 6;
-      if (amount <= 300000) return 10;
-      return 12;
+    function calculateLoan() {
+      const amount = parseInt(range.value);
+      loanAmountEl.textContent = amount.toLocaleString();
+      const total = amount * (1 + interestRate);
+      const monthly = total / months;
+      monthlyPaymentEl.textContent = 'Rs ' + Math.round(monthly).toLocaleString();
+      totalRepaymentEl.textContent = 'Rs ' + Math.round(total).toLocaleString();
     }
 
-    function calculate(amount) {
-      const n = getInstallmentMonths(amount);
-      const r = MONTH_RATE;
-      const monthly = (r * amount) / (1 - Math.pow(1 + r, -n));
-      return { monthly, total: monthly * n, n };
-    }
-
-    function addMonthsKeepDay(date, months) {
-      const d = new Date(date);
-      const day = d.getDate();
-      d.setMonth(d.getMonth() + months);
-      if (d.getDate() !== day) d.setDate(0);
-      return d;
-    }
-
-    function updateAll() {
-      const amt = +amountRange.value;
-      amountText.textContent = fmt(amt);
-      const { monthly, total, n } = calculate(amt);
-      monthlyValue.textContent = 'Rs. ' + fmt(Math.round(monthly));
-      totalPayable.textContent = 'Rs. ' + fmt(Math.round(total));
-      installmentsCount.textContent = n + ' months';
-      const now = new Date();
-      applyDateEl.textContent = now.toLocaleDateString('en-LK');
-      const firstDue = addMonthsKeepDay(now, 1);
-      firstDueDateEl.textContent = firstDue.toLocaleDateString('en-LK');
-    }
-
-    amountRange.addEventListener('input', updateAll);
-    updateAll();
-
-    document.querySelectorAll('.accordion').forEach(acc => {
-      acc.querySelector('.acc-btn').addEventListener('click', () => {
-        acc.classList.toggle('active');
-      });
-    });
+    range.addEventListener('input', calculateLoan);
+    calculateLoan();
   </script>
 </body>
 </html>
