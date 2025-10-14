@@ -798,14 +798,12 @@
       if (amount > 200000 && amount <= 300000) return 10;
       return 12;
     }
-    function calculate(amount) {
-      const n = getInstallmentMonths(amount);
-      const r = MONTH_RATE;
-      let monthly;
-      if (r === 0) monthly = amount / n;
-      else monthly = (r * amount) / (1 - Math.pow(1 + r, -n));
-      return { monthly, total: monthly * n, n };
-    }
+   function calculate(amount) {
+   const interestRate = 0.07; // 7% interest
+   const total = amount + (amount * interestRate);
+   const monthly = total / 12; // default 12 months
+   return { monthly, total, n: 12 };
+  }
     function addMonthsKeepDay(date, months) {
       const d = new Date(date.getTime());
       const day = d.getDate();
