@@ -461,18 +461,22 @@
         font-size: 14px;
       }
 
-/* ==== Responsive Image Fix ==== */
-.image-container {
+* Image Section - Responsive Aspect Ratio Fix */
+.app-image {
+  position: relative;
   width: 100%;
-  max-width: 100%;
   overflow: hidden;
 }
 
-.responsive-image {
+.app-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: cover;
+  aspect-ratio: 16/9; /* adjust this if needed (16:9, 4:3, 1:1 etc.) */
+  border: none;
+  margin: 0;
+  padding: 0;
 }
   </style>
 </head>
