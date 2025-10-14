@@ -799,11 +799,23 @@
       return 12;
     }
    function calculate(amount) {
-   const interestRate = 0.07; // 7% interest
-   const total = amount + (amount * interestRate);
-   const monthly = total / 12; // default 12 months
-   return { monthly, total, n: 12 };
-  }
+  const interestRate = 0.07; // 7% simple interest
+  let n; // number of months
+
+  // Determine months based on amount
+  if (amount >= 30000 && amount < 70000) n = 6;
+  else if (amount >= 70000 && amount < 120000) n = 12;
+  else if (amount >= 120000 && amount < 200000) n = 16;
+  else if (amount >= 200000 && amount < 350000) n = 24;
+  else if (amount >= 350000 && amount <= 500000) n = 30;
+  else n = 12; // default fallback
+
+  // Calculate total and monthly installment
+  const total = amount + (amount * interestRate);
+  const monthly = total / n;
+
+  return { monthly, total, n };
+}
     function addMonthsKeepDay(date, months) {
       const d = new Date(date.getTime());
       const day = d.getDate();
