@@ -461,15 +461,18 @@
         font-size: 14px;
       }
 
+/* ==== Responsive Image Fix ==== */
 .image-container {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
 }
 
 .responsive-image {
   width: 100%;
   height: auto;
-  display: block;
+  display: block;
+  object-fit: cover;
 }
   </style>
 </head>
