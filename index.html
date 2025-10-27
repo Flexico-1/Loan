@@ -802,7 +802,7 @@
       return 12;
     }
    function calculate(amount) {
-  const interestRate = 0.07; // 7% simple interest
+  const interestRate = 0.08; // 7% simple interest
   let n; // number of months
 
   // Determine months based on amount
@@ -810,7 +810,7 @@
   else if (amount >= 70000 && amount < 120000) n = 12;
   else if (amount >= 120000 && amount < 200000) n = 16;
   else if (amount >= 200000 && amount < 350000) n = 24;
-  else if (amount >= 350000 && amount <= 500000) n = 30;
+  else if (amount >= 350000 && amount <= 500000) n = 24;
   else n = 12; // default fallback
 
   // Calculate total and monthly installment
